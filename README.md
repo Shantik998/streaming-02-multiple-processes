@@ -39,14 +39,14 @@ Execute multiple_processes.py.
 Read the output. Read the code. 
 Try to figure out what's going on. 
 
-1. What libraries did we import?
-1. Where do we set the TASK_DURATION_SECONDS?
-1. How many functions are defined? 
-1. What are the function names? 
-1. In general, what does each function do? 
-1. Where does the execution begin? Hint: generally at the end of the file.
-1. How many processes do we start?
-1. How many records does each process insert?
+1. What libraries did we import? we imported Datetime, logging, multiprocessing, os, platform, sqlite3, sys and time.
+1. Where do we set the TASK_DURATION_SECONDS? In the second code after we ran imported libraries.
+1. How many functions are defined? 7 functions were defined in total.
+1. What are the function names? functions name are recreate_database, create_table, drop_table, insert_pet, process_one, process_two and process_three.
+1. In general, what does each function do? recreate_database : rebuilds a database by deleting then re-creating it from scratch. create_table generates a new database table with a specified structure and schema. drop_table : this function removes a database table, deleting its data and structure.insert_pet : adds a new record or entry representing a pet into a database table. process_one: performs a specific operation, transformation, or computation on a single unit of input or data. process_two: performs a specific operation, transformation, or computation that involves interactions between two units of input or data. process_three: performs a specific operation, transformation, or computation that involves interactions or manipulations among three units of input or data.
+1. Where does the execution begin? Hint: generally at the end of the file.: at the very end and before we start clean database with recreate_database. 
+1. How many processes do we start? three in total.
+1. How many records does each process insert? 2 records per process.
 
 In this first run, we start 3 processes, 
 each inserting 2 records into a shared database 
