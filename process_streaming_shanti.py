@@ -11,7 +11,6 @@ Important!
 
 We'll stream forever - or until we read the end of the file. 
 Use use Ctrl-C to stop. (Hit Control key and c key at the same time.)
-
 Explore more at 
 https://wiki.python.org/moin/UdpCommunication
 
