@@ -5,3 +5,39 @@ This will clear the console output.
 Run the file once while the tasks are short. 
 
 Copy and paste the terminal results (when task_duration is 0) here.
+base) Shantis-MacBook-Pro:streaming-02-multiple-processes-1 shantikandel$ /usr/local/bin/python3 /Users/shantikandel/Streaming-02-multiple-processes/streaming-02-multiple-processes-1/multiple_processes.py
+2023-09-01 19:57:10,349 - INFO - 
+======================================================================
+STARTING UP.............................
+  Date and Time:    2023-09-01 at 07:57 PM
+  Operating System: posix Darwin 22.4.0
+  Python Version:   3.10.9
+  Path to Interpreter:  /usr/local/bin/python3
+======================================================================
+
+2023-09-01 19:57:10,350 - INFO - Called recreate_database().
+2023-09-01 19:57:10,350 - INFO - Called drop_table().
+2023-09-01 19:57:10,362 - INFO - Table 'pets' dropped successfully.
+2023-09-01 19:57:10,364 - INFO - Called create_table().
+2023-09-01 19:57:10,365 - INFO - Table 'pets' created successfully.
+2023-09-01 19:57:10,492 - INFO - Called process_one().
+2023-09-01 19:57:10,492 - INFO -   Called insert_pet() with process=P1, name=Ace, breed=Dog.
+2023-09-01 19:57:10,493 - INFO - Called process_two().
+2023-09-01 19:57:10,493 - INFO -   Called insert_pet() with process=P2, name=Cooper, breed=Rabbit.
+2023-09-01 19:57:10,494 - INFO -   Called insert_pet() with process=P1, name=Buddy, breed=Dog.
+2023-09-01 19:57:10,496 - INFO - Called process_three().
+2023-09-01 19:57:10,496 - INFO -   Called insert_pet() with process=P3, name=Emma, breed=Rabbit.
+2023-09-01 19:57:10,496 - INFO -   Called insert_pet() with process=P2, name=Dingo, breed=Dog.
+2023-09-01 19:57:10,497 - INFO -   Called insert_pet() with process=P3, name=Felix, breed=Cat.
+2023-09-01 19:57:10,512 - INFO - 
+SUCCESS: All processes successfully completed!
+
+Now - increase the task duration (representing 
+      the time the task has the database 
+      tied up during an insert statement).
+How well do multiple, concurrent processes share a database 
+    when each task takes more time? 
+How can multiple processes share a resource
+    without interfering with each other?
+
+(base) Shantis-MacBook-Pro:streaming-02-multiple-processes-1 shantikandel$ 
