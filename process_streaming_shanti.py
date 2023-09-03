@@ -11,6 +11,7 @@ Important!
 
 We'll stream forever - or until we read the end of the file. 
 Use use Ctrl-C to stop. (Hit Control key and c key at the same time.)
+
 Explore more at 
 https://wiki.python.org/moin/UdpCommunication
 
@@ -21,7 +22,7 @@ https://wiki.python.org/moin/UdpCommunication
 import csv
 import socket
 import time
-import logging
+import logging,random
 
 # Set up basic configuration for logging
 
@@ -41,16 +42,28 @@ OUTPUT_FILE_NAME = "out9.txt"
 # Define program functions (bits of reusable code)
 
 
+# ... (previous code)
+
 def prepare_message_from_row(row):
     """Prepare a binary message from a given row."""
-    price, area, bedrooms, bathrooms, stories, mainroad, guestroom, basement, hotwaterheating, airconditioning, parking, prefarea, furnishingstatus = row
-    # use an fstring to create a message from our data
-    fstring_message = f"[{price}, {area}, {bedrooms}, {bathrooms}, {stories}, {mainroad}, {guestroom}, {basement}, {hotwaterheating}, {airconditioning}, {parking}, {prefarea}, {furnishingstatus}]"
-
-    # prepare a binary (1s and 0s) message to stream
+    fstring_message = f"[{', '.join(map(str, row))}]"
     MESSAGE = fstring_message.encode()
     logging.debug(f"Prepared message: {fstring_message}")
     return MESSAGE
+
+# ... (previous code)
+
+if __name__ == "__main__":
+    try:
+        logging.info("===============================================")
+        logging.info("Starting fake streaming process.")
+        stream_row(INPUT_FILE_NAME, ADDRESS_TUPLE)
+        logging.info("Streaming complete!")
+        logging.info("===============================================")
+    except KeyboardInterrupt:
+        logging.info("Streaming process terminated by user.")
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
 
 
 
@@ -68,13 +81,13 @@ def stream_row(input_file_name, address_tuple):
          sock_object = socket.socket(ADDRESS_FAMILY, SOCKET_TYPE)
 
          rows = list(reader)
-         
+         rows.reverse()  # Reverse the order of rows
 
-         last_processed_index = 0  # Track the index 
+         last_processed_index = 0  # Track the index of the last processed row
 
          with open(OUTPUT_FILE_NAME, "w") as output_file:
               logging.info(f"Opened for writing: {OUTPUT_FILE_NAME}.")
-              while True: 
+              while True:  # Continue streaming indefinitely
                   for i in range(last_processed_index, len(rows)):
                      row = rows[i]
                      MESSAGE = prepare_message_from_row(row)
@@ -82,9 +95,11 @@ def stream_row(input_file_name, address_tuple):
                      output_file.write(str(MESSAGE) + "\n")
                      logging.info(f"Sent and wrote: {MESSAGE} on port {PORT}. Hit CTRL-c to stop.")
 
-                     last_processed_index = len(rows)  # Update the index 
-                     
-                     time.sleep(3)
+                     last_processed_index = len(rows)  # Update the index of the last processed row
+
+                     # Generate one record every 1-3 seconds
+                     sleep_time = random.uniform(1, 4)
+                     time.sleep(sleep_time)
 
 # ---------------------------------------------------------------------------
 # If this is the script we are running, then call some functions and execute code!
